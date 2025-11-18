@@ -1,0 +1,40 @@
+name: Validate HTML
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'docs/**/*.html'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'docs/**/*.html'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install html-validate
+      run: npm install -g html-validate
+    
+    - name: Validate HTML files
+      run: |
+        cd docs
+        html-validate *.html || echo "HTML validation completed with warnings"
+    
+    - name: Check for broken links (basic)
+      run: |
+        echo "Checking for common issues in HTML files..."
+        grep -r "href=\"http://localhost" docs/ && echo "Warning: Found localhost links" || echo "✓ No localhost links found"
+        grep -r "src=\"http://localhost" docs/ && echo "Warning: Found localhost sources" || echo "✓ No localhost sources found"

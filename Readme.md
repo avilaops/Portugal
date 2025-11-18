@@ -1,11 +1,18 @@
-# Projeto Lisboa - Expansão Ávila
+# Projeto Lisboa - Portugal
+
+[![Deploy to GitHub Pages](https://github.com/avilaops/Portugal/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/avilaops/Portugal/actions/workflows/deploy-pages.yml)
+[![Python Code Quality](https://github.com/avilaops/Portugal/actions/workflows/python-lint.yml/badge.svg)](https://github.com/avilaops/Portugal/actions/workflows/python-lint.yml)
+[![Validate HTML](https://github.com/avilaops/Portugal/actions/workflows/validate-html.yml/badge.svg)](https://github.com/avilaops/Portugal/actions/workflows/validate-html.yml)
 
 ## 🎯 Visão Geral
+
 Planejamento completo da jornada da Ávila para estabelecer operações em Lisboa, Portugal.
 
-**Fundador**: Nícolas
-**Vistos existentes**: Estados Unidos, África do Sul, Canadá
+**Fundador**: Nícolas  
+**Vistos existentes**: Estados Unidos, África do Sul, Canadá  
 **Residência atual**: Brasil
+
+🌐 **Site do Projeto**: [portugal.avila.inc](https://portugal.avila.inc)
 
 ## 📋 Estrutura do Projeto
 
@@ -63,4 +70,31 @@ Planejamento para estabelecer a empresa em Lisboa
 
 **"De um bairro em Lisboa para toda a cidade. Uma solução de cada vez."** 🇵🇹
 
-# Portural
+## 💻 Uso Local
+
+### Sistema Python (Recomendado para uso completo)
+
+```powershell
+# Instalar dependências
+cd "03-Mapeamento-Estabelecimentos/ferramentas"
+pip install -r requirements.txt
+
+# Executar dashboard Streamlit
+streamlit run interface_web.py
+```
+
+### Website Estático
+
+O site está disponível online em [portugal.avila.inc](https://portugal.avila.inc)
+
+## 🔄 CI/CD Workflows
+
+Este projeto usa GitHub Actions para automação:
+
+- **Deploy to GitHub Pages**: Publica automaticamente o site em cada push
+- **Python Code Quality**: Valida código Python (lint e syntax check)
+- **Validate HTML**: Verifica a qualidade dos arquivos HTML
+
+## 📄 Licença
+
+Projeto privado - Ávila © 2025

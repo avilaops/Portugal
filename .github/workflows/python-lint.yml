@@ -1,0 +1,48 @@
+name: Python Code Quality
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - '03-Mapeamento-Estabelecimentos/ferramentas/**/*.py'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - '03-Mapeamento-Estabelecimentos/ferramentas/**/*.py'
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+        cd 03-Mapeamento-Estabelecimentos/ferramentas
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    
+    - name: Lint with flake8
+      run: |
+        # Apenas arquivos Python do projeto de mapeamento
+        cd 03-Mapeamento-Estabelecimentos/ferramentas
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 *.py --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 *.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Check Python syntax
+      run: |
+        cd 03-Mapeamento-Estabelecimentos/ferramentas
+        python -m py_compile mapeamento.py
+        python -m py_compile interface_web.py

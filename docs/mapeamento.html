@@ -247,7 +247,7 @@
 
     <div class="container">
         <div class="alert alert-info">
-            <strong>💡 Nota:</strong> Este é um protótipo frontend. Os dados são armazenados localmente no navegador (localStorage). 
+            <strong>💡 Nota:</strong> Este é um protótipo frontend. Os dados são armazenados localmente no navegador (localStorage).
             Para a versão completa com backend, use o sistema Python + Streamlit.
         </div>
 
@@ -394,10 +394,10 @@
         function showTab(tabName) {
             const tabs = document.querySelectorAll('.tab');
             const contents = document.querySelectorAll('.tab-content');
-            
+
             tabs.forEach(tab => tab.classList.remove('active'));
             contents.forEach(content => content.classList.remove('active'));
-            
+
             event.target.classList.add('active');
             document.getElementById(tabName).classList.add('active');
         }
@@ -405,10 +405,10 @@
         // Formulário
         document.getElementById('formEstabelecimento').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const oportunidadesText = document.getElementById('oportunidades').value;
             const oportunidades = oportunidadesText ? oportunidadesText.split('\n').filter(o => o.trim()) : [];
-            
+
             const estabelecimento = {
                 id: Date.now(),
                 nome: document.getElementById('nome').value,
@@ -431,19 +431,19 @@
                 statusContato: 'Não contatado',
                 dataMapeamento: new Date().toISOString()
             };
-            
+
             const estabelecimentos = getEstabelecimentos();
             estabelecimentos.push(estabelecimento);
             saveEstabelecimentos(estabelecimentos);
-            
+
             // Mostrar sucesso
             const alertDiv = document.createElement('div');
             alertDiv.className = 'alert alert-success';
             alertDiv.textContent = `✅ "${estabelecimento.nome}" adicionado com sucesso!`;
             document.getElementById('adicionar').insertBefore(alertDiv, document.getElementById('formEstabelecimento'));
-            
+
             setTimeout(() => alertDiv.remove(), 3000);
-            
+
             // Limpar formulário
             this.reset();
         });
@@ -460,7 +460,7 @@
         // Render Listas
         function renderListas() {
             const estabelecimentos = getEstabelecimentos();
-            
+
             // Lista completa
             const listaDiv = document.getElementById('listaEstabelecimentos');
             if (estabelecimentos.length === 0) {
@@ -486,13 +486,13 @@
                     </div>
                 `).join('');
             }
-            
+
             // Lista de prioridades
             const prioritarios = estabelecimentos
                 .filter(e => e.statusContato === 'Não contatado')
                 .sort((a, b) => b.prioridade - a.prioridade)
                 .slice(0, 20);
-            
+
             const prioridadesDiv = document.getElementById('listaPrioridades');
             if (prioritarios.length === 0) {
                 prioridadesDiv.innerHTML = '<p>🎉 Todos os estabelecimentos foram contatados!</p>';
