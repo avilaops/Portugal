@@ -18,6 +18,10 @@
     <!-- Iconoir Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
 
+    <!-- API Modules -->
+    <script src="js/avila-api.js"></script>
+    <script src="js/github-sync.js"></script>
+
     <title>Sistema de Mapeamento - Lisboa | Ávila Portugal</title>
 
     <style>
@@ -97,13 +101,63 @@
         .header {
             background: radial-gradient(ellipse at top, #1a1d26 0%, #0a0b0d 100%);
             color: white;
-            padding: 60px 20px;
+            padding: 20px 20px 60px;
             text-align: center;
             border-bottom: 2px solid transparent;
             border-image: var(--portugal-gradient) 1;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
             position: relative;
             overflow: hidden;
+        }
+
+        .user-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--portugal-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+        }
+
+        .btn-logout {
+            background: rgba(220, 53, 69, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-logout:hover {
+            background: rgba(220, 53, 69, 0.3);
+            transform: translateY(-2px);
         }
 
         .header::before {
@@ -519,15 +573,32 @@
         <div class="loader-spinner"></div>
     </div>
 
+    <!-- Auth Check -->
+    <script>
+        // Verifica autenticação antes de carregar a página
+        if (!localStorage.getItem('avila_auth_token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+
     <div class="header">
+        <div class="user-bar">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <span id="userName"></span>
+            </div>
+            <button class="btn-logout" onclick="logout()">
+                <i class="iconoir-log-out"></i> Sair
+            </button>
+        </div>
         <h1>🗺️ Sistema de Mapeamento - Lisboa</h1>
         <p>Gestão Inteligente de Estabelecimentos Comerciais</p>
     </div>
 
     <div class="container">
         <div class="alert alert-info">
-            <strong>💡 Sistema Local:</strong> Os dados são armazenados localmente no navegador (localStorage). 
-            Para a versão completa com backend Python, consulte o sistema Streamlit.
+            <strong>💡 Sistema Híbrido:</strong> Os dados são salvos localmente e sincronizados com a nuvem automaticamente. 
+            Acesse o <a href="https://portal.avila.inc" target="_blank" style="color: #48d597; text-decoration: underline;">Portal Ávila</a> para mais recursos.
         </div>
 
         <div class="nav-tabs">
@@ -657,6 +728,31 @@
     </div>
 
     <script>
+        // Carrega informações do usuário
+        function loadUserInfo() {
+            const userJson = localStorage.getItem('avila_user');
+            if (userJson) {
+                const user = JSON.parse(userJson);
+                const userName = user.name || user.email.split('@')[0];
+                const initials = userName.substring(0, 2).toUpperCase();
+                
+                document.getElementById('userAvatar').textContent = initials;
+                document.getElementById('userName').textContent = userName;
+            }
+        }
+
+        // Função de logout
+        function logout() {
+            if (confirm('Tem certeza que deseja sair?')) {
+                localStorage.removeItem('avila_auth_token');
+                localStorage.removeItem('avila_user');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Carrega user info ao iniciar
+        loadUserInfo();
+
         // Loader
         window.addEventListener('load', () => {
             document.querySelector('.loader').classList.add('hidden');
