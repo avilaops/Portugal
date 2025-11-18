@@ -8,8 +8,8 @@
 
 Planejamento completo da jornada da Ávila para estabelecer operações em Lisboa, Portugal.
 
-**Fundador**: Nícolas  
-**Vistos existentes**: Estados Unidos, África do Sul, Canadá  
+**Fundador**: Nícolas
+**Vistos existentes**: Estados Unidos, África do Sul, Canadá
 **Residência atual**: Brasil
 
 🌐 **Site do Projeto**: [portugal.avila.inc](https://portugal.avila.inc)
