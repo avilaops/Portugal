@@ -1,0 +1,88 @@
+# Rust Build Artifacts
+/target/
+**/target/
+**/*.rs.bk
+*.pdb
+*.rlib
+*.rmeta
+*.d
+
+# Cargo
+Cargo.lock
+
+# IDEs
+.vscode/
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+*.code-workspace
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary Files
+*.tmp
+*.bak
+*~
+.#*
+\#*\#
+
+# Logs
+*.log
+logs/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Generated Files
+file_list.txt
+file_structure.txt
+tree_output.txt
+modules_structure.txt
+
+# Build Outputs
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.exp
+
+# Test Artifacts
+*.profraw
+*.profdata
+*.gcda
+*.gcno
+
+# Documentation Build
+/docs/_build/
+/book/
+
+# Package Manager
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Compressed Files (temporary)
+*.7z
+*.zip
+*.tar.gz
+*.rar
+
+# Python (if any scripts)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Misc
+*.orig
+.AppleDouble
+.LSOverride

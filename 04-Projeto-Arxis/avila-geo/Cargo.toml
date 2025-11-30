@@ -1,0 +1,130 @@
+[package]
+name = "avila-geo"
+version = "0.1.0"
+edition = "2021"
+authors = [
+    "Nícolas Ávila <nicolas@avila.inc>",
+    "Avila Development Team <dev@avila.inc>",
+]
+license = "MIT"
+description = "Geographic cartography, mapping, and geospatial analysis for Avila ecosystem"
+repository = "https://github.com/avilaops/arxis"
+homepage = "https://avila.inc"
+documentation = "https://docs.rs/avila-geo"
+readme = "README.md"
+keywords = [
+    "geospatial",
+    "gis",
+    "mapping",
+    "cartography",
+    "geography",
+]
+categories = ["science", "algorithms", "visualization"]
+rust-version = "1.70"
+
+[lib]
+name = "avila_geo"
+path = "src/lib.rs"
+
+[features]
+default = ["spatial-native", "parallel-native"]
+
+# Core features (100% Rust nativo)
+spatial-native = []
+parallel-native = ["dep:avila-parallel"]
+imaging = ["dep:avila-image"]
+compression = ["avila-compress"]
+
+# 30 Advanced GIS Features (Nivel Esri ArcGIS)
+gis-buffer = []
+gis-overlay = []
+gis-proximity = []
+gis-density = []
+gis-hotspot = []
+gis-clustering = []
+gis-interpolation = []
+gis-surface = []
+gis-hydrology = []
+gis-visibility = []
+gis-network = []
+gis-service-area = []
+gis-closest-facility = []
+gis-od-matrix = []
+gis-vehicle-routing = []
+gis-raster-calc = []
+gis-zonal-stats = []
+gis-focal-stats = []
+gis-reclassify = []
+gis-cost-distance = []
+gis-geocoding = []
+gis-reverse-geocoding = []
+gis-batch-geocoding = []
+gis-turn-by-turn = []
+gis-multimodal = []
+gis-terrain-3d = []
+gis-viewshed-3d = []
+gis-space-time = []
+gis-temporal-agg = []
+gis-emerging-hotspots = []
+
+# Feature bundles
+gis-analysis = ["gis-buffer", "gis-overlay", "gis-proximity", "gis-density", "gis-hotspot"]
+gis-network-analysis = ["gis-network", "gis-service-area", "gis-closest-facility", "gis-od-matrix", "gis-vehicle-routing"]
+gis-raster = ["gis-raster-calc", "gis-zonal-stats", "gis-focal-stats", "gis-reclassify", "gis-cost-distance"]
+gis-geocoding-suite = ["gis-geocoding", "gis-reverse-geocoding", "gis-batch-geocoding", "gis-turn-by-turn", "gis-multimodal"]
+gis-3d = ["gis-terrain-3d", "gis-viewshed-3d"]
+gis-temporal = ["gis-space-time", "gis-temporal-agg", "gis-emerging-hotspots"]
+
+# All GIS features
+gis-full = [
+    "gis-analysis",
+    "gis-network-analysis",
+    "gis-raster",
+    "gis-geocoding-suite",
+    "gis-3d",
+    "gis-temporal",
+    "gis-clustering",
+    "gis-interpolation",
+    "gis-surface",
+    "gis-hydrology",
+    "gis-visibility"
+]
+
+# Complete package
+full = ["imaging", "compression", "spatial-native", "parallel-native", "gis-full"]
+
+[dependencies]
+# Core dependencies from Avila ecosystem (100% Rust Nativo!)
+avila-math = { version = "0.1.0", path = "../avila-math" }
+avila-linalg = { version = "0.1.1", path = "../avila-linalg" }
+avila-compress = { version = "0.1.0", path = "../avila-compress", optional = true }
+avila-image = { version = "0.1.0", path = "../avila-image", optional = true }
+avila-parallel = { version = "0.1.0", path = "../avila-parallel", optional = true }
+avila-serde = { version = "0.1.0", path = "../avila-serde" }
+avila-error = { version = "0.1.0", path = "../avila-error" }
+avila-numeric = { version = "0.1.0", path = "../avila-numeric" }
+
+# ZERO external dependencies críticas!
+# Todas as funcionalidades implementadas 100% em Rust nativo pela Ávila
+
+[dev-dependencies]
+criterion = "0.5"
+approx = "0.5"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+strip = true
+
+[profile.bench]
+inherits = "release"
+
+[profile.dev]
+opt-level = 0
+debug = true
+incremental = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

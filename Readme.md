@@ -1,12 +1,15 @@
-# Projeto Lisboa - Portugal
+# Projeto Lisboa - Portugal 🇵🇹 + Arxis 🛡️
 
 [![Deploy to GitHub Pages](https://github.com/avilaops/Portugal/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/avilaops/Portugal/actions/workflows/deploy-pages.yml)
 [![Python Code Quality](https://github.com/avilaops/Portugal/actions/workflows/python-lint.yml/badge.svg)](https://github.com/avilaops/Portugal/actions/workflows/python-lint.yml)
 [![Validate HTML](https://github.com/avilaops/Portugal/actions/workflows/validate-html.yml/badge.svg)](https://github.com/avilaops/Portugal/actions/workflows/validate-html.yml)
+[![CI Arxis](https://github.com/avilaops/arxis/workflows/CI/badge.svg)](https://github.com/avilaops/arxis/actions)
 
 ## 🎯 Visão Geral
 
-Planejamento completo da jornada da Ávila para estabelecer operações em Lisboa, Portugal.
+**Projeto unificado combinando:**
+- 🇵🇹 **Portugal**: Planejamento completo da jornada da Ávila para estabelecer operações em Lisboa, Portugal
+- 🛡️ **Arxis**: Engine matemático e computacional de pesquisa em Rust para computação científica
 
 **Fundador**: Nícolas
 **Vistos existentes**: Estados Unidos, África do Sul, Canadá
@@ -42,6 +45,31 @@ Planejamento para estabelecer a empresa em Lisboa
 - **Sistema de Mapeamento em Python**: Catalogação e análise de estabelecimentos
 - **Interface Web (Streamlit)**: Dashboard interativo para gestão
 - **Templates de Abordagem**: Roteiros para primeiro contato
+
+### [04-Projeto-Arxis](./04-Projeto-Arxis/)
+🛡️ **Arxis - The Mathematical Citadel & Computational Engine**
+
+Engine de computação científica em Rust desenvolvido pela Ávila, combinando:
+- **ARX** (fortaleza em Latim) - Fundações matemáticas sólidas
+- **AXIS** (eixo/motor) - Motor computacional central
+
+#### 🎯 Características Principais
+- **Matemática Avançada**: Quaternions, tensores, geometria 4D
+- **Gravitational Waves**: Biblioteca research-grade para Relatividade Geral
+- **Machine Learning**: Convoluções 1D/2D, tokenização NLP
+- **Performance**: 100% Rust nativo, otimizado para missões críticas
+- **NASA/LISA Ready**: Preparado para missões científicas espaciais
+
+#### 📦 Crates Principais
+- `avila-compress` - Compressão nativa LZ4 otimizada
+- `avila-tokenizers` - Tokenização universal para LLMs (GPT, BERT, Llama, Claude)
+- `avila-convexa1d` - Convoluções 1D (áudio, texto)
+- `avila-convexa2d` - Convoluções 2D (imagens, vídeo)
+- `avila-linalg` - Álgebra linear de alto desempenho
+- `avila-dataframe` - DataFrames para análise de dados
+
+**Documentação completa**: [docs.rs/arxis](https://docs.rs/arxis_quaternions)
+**Repositório original**: [github.com/avilaops/arxis](https://github.com/avilaops/arxis)
 
 ## 🗓️ Timeline Geral
 

@@ -1,0 +1,72 @@
+[package]
+name = "avx-events"
+version = "0.1.0"
+edition = "2021"
+authors = [
+    "Nícolas Ávila <nicolas@avila.inc>",
+    "Avila Development Team <dev@avila.inc>",
+]
+license = "MIT OR Apache-2.0"
+description = "Event system and pub/sub for AVX API Gateway and AVL Platform"
+repository = "https://github.com/avilaops/arxis"
+homepage = "https://avila.inc"
+documentation = "https://docs.rs/avx-events"
+readme = "README.md"
+keywords = [
+    "events",
+    "pub-sub",
+    "event-driven",
+    "messaging",
+]
+categories = ["asynchronous", "web-programming"]
+rust-version = "1.70"
+
+[lib]
+name = "avx_events"
+path = "src/lib.rs"
+
+[features]
+default = ["queue"]
+queue = ["avl-queue"]
+full = ["queue"]
+
+[dependencies]
+# AVL Cloud Platform integration
+avl-queue = { version = "0.1.0", path = "../avl-queue", optional = true }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+futures = "0.3"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID generation
+uuid = { version = "1.11", features = ["v4", "serde"] }
+
+# Error handling
+thiserror = "2.0"
+
+# Logging
+tracing = "0.1"
+
+[dev-dependencies]
+tokio-test = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+
+[profile.dev]
+opt-level = 0
+debug = true
+incremental = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

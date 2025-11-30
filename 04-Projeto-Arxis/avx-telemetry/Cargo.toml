@@ -1,0 +1,77 @@
+[package]
+name = "avx-telemetry"
+version = "0.1.0"
+edition = "2021"
+authors = [
+    "Nícolas Ávila <nicolas@avila.inc>",
+    "Avila Development Team <dev@avila.inc>",
+]
+license = "MIT OR Apache-2.0"
+description = "Telemetry middleware and utilities for AVX API Gateway"
+repository = "https://github.com/avilaops/arxis"
+homepage = "https://avila.inc"
+documentation = "https://docs.rs/avx-telemetry"
+readme = "README.md"
+keywords = [
+    "telemetry",
+    "middleware",
+    "metrics",
+    "monitoring",
+]
+categories = ["web-programming", "asynchronous", "development-tools::profiling"]
+rust-version = "1.70"
+
+[lib]
+name = "avx_telemetry"
+path = "src/lib.rs"
+
+[features]
+default = ["middleware"]
+middleware = ["dep:axum"]
+observability = ["avl-observability"]
+full = ["middleware", "observability"]
+
+[dependencies]
+# AVL Cloud Platform integration
+avl-observability = { version = "0.1.0", path = "../avl-observability", optional = true }
+
+# Async runtime
+tokio = { version = "1", features = ["time"] }
+
+# HTTP middleware
+axum = { version = "0.7", optional = true }
+tower = "0.5"
+
+# Tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# UUID generation
+uuid = { version = "1.11", features = ["v4", "serde"] }
+
+# Error handling
+thiserror = "2.0"
+
+[dev-dependencies]
+tokio-test = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+
+[profile.dev]
+opt-level = 0
+debug = true
+incremental = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
